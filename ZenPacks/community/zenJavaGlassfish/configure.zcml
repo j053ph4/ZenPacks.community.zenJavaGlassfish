@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <configure
+        xmlns="http://namespaces.zope.org/zope"
+        xmlns:browser="http://namespaces.zope.org/browser"
+        xmlns:zcml="http://namespaces.zope.org/zcml">
+        <configure zcml:condition="installed Products.Zuul">
+
+            <include package="Products.ZenUtils.extdirect.zope" file="meta.zcml"/>
+
+
+            <!-- ZenPack Info -->
+
+            <browser:directRouter
+                name="zenJavaGlassfish_router"
+                for="*"
+                class="ZenPacks.community.zenJavaGlassfish.routers.zenJavaGlassfishRouter"
+                namespace="Zenoss.remote"
+                permission="zenoss.View"
+            />
+    
+            <adapter
+                name="zenJavaGlassfishAdapter"
+                provides="ZenPacks.community.zenJavaGlassfish.interfaces.IzenJavaGlassfishFacade"
+                for="*"
+                factory="ZenPacks.community.zenJavaGlassfish.facades.zenJavaGlassfishFacade"
+            />
+                
+            <browser:resourceDirectory
+                    name="zenJavaGlassfish"
+                    directory="resources"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.zenJavaGlassfish.info.GlassfishWSEndpointInfo"
+                for="ZenPacks.community.zenJavaGlassfish.GlassfishWSEndpoint.GlassfishWSEndpoint"
+                provides="ZenPacks.community.zenJavaGlassfish.interfaces.IGlassfishWSEndpointInfo"
+            />
+    
+            <browser:viewlet
+                name="js-GlassfishWSEndpoint"
+                paths="/++resource++zenJavaGlassfish/glassfishwsendpoint.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.GlassfishWSEndpointgetEventClassesVocabulary"
+                name="GlassfishWSEndpointgetEventClasses"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.zenJavaGlassfish.info.GlassfishJMSServiceInfo"
+                for="ZenPacks.community.zenJavaGlassfish.GlassfishJMSService.GlassfishJMSService"
+                provides="ZenPacks.community.zenJavaGlassfish.interfaces.IGlassfishJMSServiceInfo"
+            />
+    
+            <browser:viewlet
+                name="js-GlassfishJMSService"
+                paths="/++resource++zenJavaGlassfish/glassfishjmsservice.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.GlassfishJMSServicegetEventClassesVocabulary"
+                name="GlassfishJMSServicegetEventClasses"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.zenJavaGlassfish.info.GlassfishJ2EEModuleInfo"
+                for="ZenPacks.community.zenJavaGlassfish.GlassfishJ2EEModule.GlassfishJ2EEModule"
+                provides="ZenPacks.community.zenJavaGlassfish.interfaces.IGlassfishJ2EEModuleInfo"
+            />
+    
+            <browser:viewlet
+                name="js-GlassfishJ2EEModule"
+                paths="/++resource++zenJavaGlassfish/glassfishj2eemodule.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.GlassfishJ2EEModulegetEventClassesVocabulary"
+                name="GlassfishJ2EEModulegetEventClasses"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.zenJavaGlassfish.info.GlassfishJMSDestinationInfo"
+                for="ZenPacks.community.zenJavaGlassfish.GlassfishJMSDestination.GlassfishJMSDestination"
+                provides="ZenPacks.community.zenJavaGlassfish.interfaces.IGlassfishJMSDestinationInfo"
+            />
+    
+            <browser:viewlet
+                name="js-GlassfishJMSDestination"
+                paths="/++resource++zenJavaGlassfish/glassfishjmsdestination.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.GlassfishJMSDestinationgetEventClassesVocabulary"
+                name="GlassfishJMSDestinationgetEventClasses"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.zenJavaGlassfish.info.GlassfishJMSConsumerManagerInfo"
+                for="ZenPacks.community.zenJavaGlassfish.GlassfishJMSConsumerManager.GlassfishJMSConsumerManager"
+                provides="ZenPacks.community.zenJavaGlassfish.interfaces.IGlassfishJMSConsumerManagerInfo"
+            />
+    
+            <browser:viewlet
+                name="js-GlassfishJMSConsumerManager"
+                paths="/++resource++zenJavaGlassfish/glassfishjmsconsumermanager.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.GlassfishJMSConsumerManagergetEventClassesVocabulary"
+                name="GlassfishJMSConsumerManagergetEventClasses"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.zenJavaGlassfish.info.GlassfishJMSConnectionManagerInfo"
+                for="ZenPacks.community.zenJavaGlassfish.GlassfishJMSConnectionManager.GlassfishJMSConnectionManager"
+                provides="ZenPacks.community.zenJavaGlassfish.interfaces.IGlassfishJMSConnectionManagerInfo"
+            />
+    
+            <browser:viewlet
+                name="js-GlassfishJMSConnectionManager"
+                paths="/++resource++zenJavaGlassfish/glassfishjmsconnectionmanager.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.GlassfishJMSConnectionManagergetEventClassesVocabulary"
+                name="GlassfishJMSConnectionManagergetEventClasses"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.zenJavaGlassfish.info.GlassfishJMSTransactionManagerInfo"
+                for="ZenPacks.community.zenJavaGlassfish.GlassfishJMSTransactionManager.GlassfishJMSTransactionManager"
+                provides="ZenPacks.community.zenJavaGlassfish.interfaces.IGlassfishJMSTransactionManagerInfo"
+            />
+    
+            <browser:viewlet
+                name="js-GlassfishJMSTransactionManager"
+                paths="/++resource++zenJavaGlassfish/glassfishjmstransactionmanager.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.GlassfishJMSTransactionManagergetEventClassesVocabulary"
+                name="GlassfishJMSTransactionManagergetEventClasses"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.zenJavaGlassfish.info.GlassfishJMSDestinationManagerInfo"
+                for="ZenPacks.community.zenJavaGlassfish.GlassfishJMSDestinationManager.GlassfishJMSDestinationManager"
+                provides="ZenPacks.community.zenJavaGlassfish.interfaces.IGlassfishJMSDestinationManagerInfo"
+            />
+    
+            <browser:viewlet
+                name="js-GlassfishJMSDestinationManager"
+                paths="/++resource++zenJavaGlassfish/glassfishjmsdestinationmanager.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.GlassfishJMSDestinationManagergetEventClassesVocabulary"
+                name="GlassfishJMSDestinationManagergetEventClasses"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.zenJavaGlassfish.info.GlassfishJMSServiceManagerInfo"
+                for="ZenPacks.community.zenJavaGlassfish.GlassfishJMSServiceManager.GlassfishJMSServiceManager"
+                provides="ZenPacks.community.zenJavaGlassfish.interfaces.IGlassfishJMSServiceManagerInfo"
+            />
+    
+            <browser:viewlet
+                name="js-GlassfishJMSServiceManager"
+                paths="/++resource++zenJavaGlassfish/glassfishjmsservicemanager.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.GlassfishJMSServiceManagergetEventClassesVocabulary"
+                name="GlassfishJMSServiceManagergetEventClasses"
+            />
+
+            <!-- Component Info -->
+            <adapter factory="ZenPacks.community.zenJavaGlassfish.info.GlassfishDomainModuleInfo"
+                for="ZenPacks.community.zenJavaGlassfish.GlassfishDomainModule.GlassfishDomainModule"
+                provides="ZenPacks.community.zenJavaGlassfish.interfaces.IGlassfishDomainModuleInfo"
+            />
+    
+            <browser:viewlet
+                name="js-GlassfishDomainModule"
+                paths="/++resource++zenJavaGlassfish/glassfishdomainmodule.js"
+                weight="10"
+                manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+                class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+                permission="zope2.Public"
+            />
+
+            <utility provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".info.GlassfishDomainModulegetEventClassesVocabulary"
+                name="GlassfishDomainModulegetEventClasses"
+            />
+
+        </configure>
+    </configure>
+

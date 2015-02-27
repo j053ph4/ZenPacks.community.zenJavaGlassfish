@@ -1,0 +1,3 @@
+[zenoss.zenpacks]
+ZenPacks.community.zenJavaGlassfish = ZenPacks.community.zenJavaGlassfish
+
