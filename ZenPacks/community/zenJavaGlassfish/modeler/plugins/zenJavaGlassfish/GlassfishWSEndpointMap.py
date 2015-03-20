@@ -1,6 +1,14 @@
 from ZenPacks.community.zenJavaApp.lib.CommonMBeanMap import *
 from ZenPacks.community.zenJavaGlassfish.Definition import *
 
+__doc__ = """GlassfishWSEndpointMap
+
+GlassfishWSEndpointMap detects Glassfish WS Endpoints on a per-JVM basis.
+
+This version adds a relation to associated ipservice and javaapp components.
+
+"""
+
 class GlassfishWSEndpointMap(CommonMBeanMap):
     """Map JMX Client output table to model."""
     
@@ -22,25 +30,24 @@ class GlassfishWSEndpointMap(CommonMBeanMap):
                 'wsUrl': '/%s' % url
                 }
     
-    def process(self, device, results, log):
-        log.info("The plugin %s returned %s results." % (self.name(), len(results)))
-        rm = self.relMap()
-        for result in results:
-            enabled = result['enabled']
-            result.pop('enabled')
-            output = self.scan.getBeanAttributeValues(port=result['port'], mbean=result['fullpath'], attributes=['wsdlEndpointAddress'], protocol=result['protocol'])
-            address = str(output['wsdlEndpointAddress'])
-            if len(address) == 0: 
-                enabled = False
-            else:
-                try: result.update(self.parseAddress(address))
-                except:  pass
-            result['wsdlEndpointAddress'] = address
-            om = self.objectMap(result)
-            om.wsHost = device.manageIp
-            om.setJavaapp = ''
-            om.setIpservice = ''
-            om.monitor = enabled 
-            rm.append(om)
-            log.debug(om)
-        return rm
+    def postprocess(self, result, om, log):
+        ''''''
+        jmx = self.scan.portdict[result['port']]
+        self.scan.proxy.setJMX(jmx)
+        output = self.scan.proxy.getBeanAttributeValues(result['fullpath'], ['wsdlEndpointAddress'])
+        address = str(output['wsdlEndpointAddress'])
+        om.wsdlEndpointAddress = address
+        if len(address) == 0: 
+            om.monitor = False
+        else:
+            #try: 
+            log.debug('address: %s' % address)
+            addr = self.parseAddress(address)
+            log.debug('addr: %s' % addr)
+            om.wsPort = addr['wsPort']
+            om.wsUrl = addr['wsUrl']
+            #except:  pass
+        om.wsHost = self.device.manageIp
+        return om
+
+
