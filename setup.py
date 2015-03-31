@@ -5,7 +5,7 @@
 NAME = "ZenPacks.community.zenJavaGlassfish"
 VERSION = "1.0.0"
 AUTHOR = "Joseph Anderson"
-LICENSE = "GPLv2+"
+LICENSE = "Apache"
 NAMESPACE_PACKAGES = ['ZenPacks', 'ZenPacks.community']
 PACKAGES = ['ZenPacks', 'ZenPacks.community', 'ZenPacks.community.zenJavaGlassfish']
 INSTALL_REQUIRES = ['ZenPacks.community.zenJavaApp>=3.0', 'ZenPacks.community.ConstructionKit>=3.0']
